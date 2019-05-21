@@ -6,7 +6,7 @@ We’re going to learn how to build a spam detection model in python to automati
 
 ## Building the Spam Message Classifier
 
-* Loading the Dataset: The dataset we will use is a collection of SMS messages tagged as spam or ham and can be found [here](https://www.kaggle.com/uciml/sms-spam-collection-dataset/downloads/sms-spam-collection-dataset.zip/1#spam.csv) – go ahead and download it. Once you have the dataset, open your jupyter notebook and let’s get to work. Our first step is to load in the data using pandas read_csv function.
+* <b>Loading the Dataset</b>: The dataset we will use is a collection of SMS messages tagged as spam or ham and can be found [here](https://www.kaggle.com/uciml/sms-spam-collection-dataset/downloads/sms-spam-collection-dataset.zip/1#spam.csv) – go ahead and download it. Once you have the dataset, open your jupyter notebook and let’s get to work. Our first step is to load in the data using pandas read_csv function.
 
 ```python
 import pandas as pd
@@ -17,7 +17,7 @@ Note that we specified encoding=”latin-1″ while reading the csv. This is bec
 
 ![Jupyter](images/Capture.PNG)
 
-* Cleaning the Dataset: Observing the dataframe, we will notice how we have three columns Unnamed: 2, Unnamed: 3, Unnamed: 4 whose rows are NaN values. We will drop them because they’re not useful for our classification. We will also rename the v1 and v2 columns and give them appropriate titles:
+* <b>Cleaning the Dataset</b>: Observing the dataframe, we will notice how we have three columns Unnamed: 2, Unnamed: 3, Unnamed: 4 whose rows are NaN values. We will drop them because they’re not useful for our classification. We will also rename the v1 and v2 columns and give them appropriate titles:
 
 ```python
 #Drop the columns not needed
@@ -31,3 +31,30 @@ df.drop(['v1', 'v2'], axis=1, inplace=True)
 df.head(10)
 ```
 ![Jupyter](images/Capture1.PNG)
+
+* <b>Creating the Bag of words Model</b>: Now that we have an idea of what our data looks like, next thing we want to do is to create a [bag-of-words model](https://machinelearningmastery.com/gentle-introduction-bag-words-model/) by leveraging the CountVectorizer function of the Scikit Learn package which we will use to create the bag of words model. This works by converting each of those messages into tokens and then we take all the words in our corpus and create a column with each word. Once fitted, CountVectorizer has built a dictionary of feature indices. The index value of a word in the vocabulary is linked to its frequency in the whole training corpus.
+
+```python
+from sklearn.feature_extraction.text import CountVectorizer
+bow_transformer = CountVectorizer().fit_transform(df['message'])
+```
+* <b>Training a model</b>: With messages represented as vectors, we can finally train our spam vs ham classifier. Our choice classifier for this project is the Naive Bayes classifier algorithm because it suitable for document classification, since it works by constructing distributions over words. Let’s go ahead and create our model:
+```python
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import classification_report
+#Split the data
+X_train, X_test, y_train, y_test = train_test_split(bow_transformer, df['label'], test_size=0.33, random_state=42)
+#Naive Bayes Classifier
+clf = MultinomialNB()
+clf.fit(X_train,y_train)
+clf.score(X_test,y_test)
+y_pred = clf.predict(X_test)
+print(classification_report(y_test, y_pred))
+```
+The output looks like this:
+![Jupyter](images/Capture2.PNG)
+
+As we see, the model predicted with a 97% accuracy. Great job! We’ve developed a model that can attempt to predict spam vs ham classification!
+
+* <b>Saving the classifier</b>: 
