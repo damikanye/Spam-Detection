@@ -59,3 +59,9 @@ The output looks like this:
 As we see, the model predicted with a 97% accuracy. Great job! We’ve developed a model that can attempt to predict spam vs ham classification!
 
 * <b>Saving the classifier</b>: 
+
+
+
+
+## License
+MIT © [Francisca](#)
