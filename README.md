@@ -1,7 +1,7 @@
 ## Building and deploying a spam detection model
 Spam is an unsolicited email message, instant message, or text message – usually sent to the recipient for commercial purposes. In other words, the recipient never explicitly asked for it, yet the get them.
 
-We’re going to learn how to build a spam detection model in python to automatically classify a message as either spam or ham(legitimate messages). When we’re done building our model, we will host it on Heroku using Flask, a lightweight web application framework so that it becomes available for anyone to use.
+We’re going to build a spam detection model in python to automatically classify a message as either spam or ham(legitimate messages). When we’re done building our model, we will host it on Heroku using Flask, a lightweight web application framework so that it becomes available for anyone to use.
 
 
 ## Building the Spam Message Classifier
