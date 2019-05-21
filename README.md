@@ -53,6 +53,7 @@ y_pred = clf.predict(X_test)
 print(classification_report(y_test, y_pred))
 ```
 The output looks like this:
+
 ![Jupyter](images/Capture2.PNG)
 
 As we see, the model predicted with a 97% accuracy. Great job! We’ve developed a model that can attempt to predict spam vs ham classification!
