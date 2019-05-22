@@ -56,11 +56,26 @@ The output looks like this:
 
 ![Jupyter](images/Capture2.PNG)
 
-As we see, the model predicted with a 97% accuracy. Great job! We’ve developed a model that can attempt to predict spam vs ham classification!
+The model predicted with a 97% accuracy. 
 
-* <b>Saving the classifier</b>: 
+* <b>Data Visualization</b>: 
+
+![Jupyter](images/Capture3.PNG)                ![Jupyter](images/Capture4.PNG)
 
 
+* <b>Saving the classifier</b>: Let’s save the just completed model so that we can always reuse it whenever necessary. We will do this using:
+
+```python
+from sklearn.externals import joblib
+joblib.dump(clf, 'our_model.pkl')
+```
+
+As a side note, when it’s time to use the model, we’ll load it using:
+
+```python
+spam_model = open('our_model.pkl','rb')
+clf = joblib.load(spam_model)
+```
 
 
 ## License
