@@ -76,6 +76,23 @@ As a side note, when it’s time to use the model, we’ll load it using:
 spam_model = open('our_model.pkl','rb')
 clf = joblib.load(spam_model)
 ```
+## Deploying The Spam Detection Model
+
+* <b>Setting up the development environment</b>: We’ll start by creating a virtual environment to manage all the packages needed for this application by following these steps below:
+
+  - Create a new folder and cd into it. 
+
+  - Initiate a virtual environment in your folder using: virtualenv .env
+
+<b>Note</b>: Virtual environment has to be already installed on your computer for that command to work. Otherwise, install it from command prompt using: pip install virtualenv
+
+  - Activate the .env file using: source .env/bin/activate
+  - Initialize git using: git init
+  - Then install the necessary packages:  pip install flask gunicorn nltk pandas sklearn numpy pickle 
+  - Finally, create a requirements.txt file using: pip freeze > requirements.txt
+
+<b>Note</b>: The requirements.txtfile is what Heroku needs to install those packages on the server in order for the application to run:
+
 
 
 ## License
